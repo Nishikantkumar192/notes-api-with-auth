@@ -34,10 +34,10 @@ app.get("/",(req,res)=>{
 
 app.use("/api/auth",authRouter);
 app.use("/api/notes",notesRouter);
-// app.use((req,res,next)=>{
-//     return next(new ExpressError(404,"page not found"));
-// })
-// app.use((err,req,res,next)={
-//     const {statusCode=500,message="server Error"}=err,
-    
-// })
+app.use((req,res,next)=>{
+    return next(new ExpressError(404,"page not found"));
+})
+app.use((err,req,res,next)=>{
+    let {status=500,message="Some Error Occured"}=err;
+    res.status(status).json({success:false,message});
+});
