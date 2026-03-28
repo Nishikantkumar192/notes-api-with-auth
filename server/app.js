@@ -6,6 +6,7 @@ const mongoose=require("mongoose");
 const app=express();
 const port=8080;
 const authRouter=require("./routes/authRoute.js");
+const notesRouter=require("./routes/notesRoute.js");
 const cookieParser=require("cookie-parser");
 const ExpressError=require("./utils/ExpressError.js");
 
@@ -29,7 +30,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/api/auth",authRouter);
-
+app.use("/api/notes",notesRouter);
 // app.use((req,res,next)=>{
 //     return next(new ExpressError(404,"page not found"));
 // })

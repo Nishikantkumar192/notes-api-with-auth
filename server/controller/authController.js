@@ -30,9 +30,11 @@ module.exports.loginUser=async(req,res,next)=>{
     try{
         const {email,password}=req.body;
         const user=await User.findOne({email});
-        if(!user) return next(new ExpressError(400,"Invalid credentials"));
+        if(!user) return res.json({success:false,message:"Invalid credentials"});
+        // if(!user) return next(new ExpressError(400,"Invalid credentials"));
         const isValid=await bcrypt.compare(password,user.password);
-        if(!isValid) return next(new ExpressError(400,"Invalid credentials"));
+        if(!isValid) return res.json({success:false,message:"Invalid credentials"});
+        // if(!isValid) return next(new ExpressError(400,"Invalid credentials"));
         const token= jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
         res.cookie("token",token,{
             httpOnly:true,
