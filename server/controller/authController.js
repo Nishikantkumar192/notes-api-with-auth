@@ -20,7 +20,7 @@ module.exports.registerUser=wrapAsync(async(req,res,next)=>{
         sameSite:"lax",
         maxAge:7*24*60*60*1000,
     })
-    return next(new ExpressError(200,"you have registered successfully"));
+    return res.json({success:true,message:"registered successfully"})
 });
 module.exports.loginUser=wrapAsync(async(req,res,next)=>{
         const {email,password}=req.body;
@@ -35,7 +35,7 @@ module.exports.loginUser=wrapAsync(async(req,res,next)=>{
             sameSite:"lax",
             maxAge:7*24*60*60*1000,
         })
-        return next(new ExpressError(200,"you have logged-in"));
+        return res.json({success:true,message:"You have Logged-in"})
 });
 module.exports.logoutUser=(req,res)=>{
     res.clearCookie("token",{

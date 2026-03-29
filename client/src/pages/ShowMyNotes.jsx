@@ -25,7 +25,7 @@ const ShowMyNotes = () => {
       setDetails(initialState);
     }
   return (
-    <div className='bg-yellow-400 h-screen flex flex-col items-center pt-[100px]'>
+    <div className='scroll-container bg-yellow-400 h-screen flex flex-col items-center pt-[100px] overflow-y-auto'>
       <form onSubmit={handleSubmit}>
         <div className='form-inputs bg-pink-400 p-4 rounded-lg'>
             <label className='font-bold' htmlFor="title">Title</label>

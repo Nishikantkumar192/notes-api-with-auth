@@ -8,8 +8,8 @@ import { ToastContainer } from "react-toastify";
 function App() {
 
   return (
-    <NoteState>
       <Router>
+    <NoteState>
         <Navbar/>
         <ToastContainer/>
         <Routes>
@@ -17,8 +17,8 @@ function App() {
           <Route exact path="/login" element={<AuthForm/>}/>
           <Route exact path="/fetchNotes" element={<ShowMyNotes/>}/>
         </Routes>
-      </Router>
     </NoteState>
+      </Router>
   )
 }
 

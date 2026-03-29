@@ -17,3 +17,22 @@
 .form-inputs div:hover{
     box-shadow: 0 0 2px 1px black;
 }
+
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent; /* thumb color, track color */
+}
+
+/* Webkit (Safari, older Chrome) */
+.scroll-container::-webkit-scrollbar {
+  width: 6px; /* thickness */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px; /* rounded corners */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}

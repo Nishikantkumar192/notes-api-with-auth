@@ -2,12 +2,19 @@ import { useState } from "react";
 import api from "../api/axios";
 import NoteContext from "./NoteContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const NoteState = (props) => {
+  const navigate=useNavigate();
   const [notes,setNotes]=useState([]);
+  const [isLoggedIn,setIsLoggedIn]=useState({});
   const newUser = async (url, input) => {
     try {
       const { data } = await api.post(url, input);
+      if(url==="/api/auth/login" && data.success===true){
+        setIsLoggedIn({username:data.username});
+        navigate("/fetchNotes");
+      }
       toast.success(data.message);
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);
@@ -16,6 +23,8 @@ const NoteState = (props) => {
   const logoutUser=async()=>{
     try{
       const {data}=await api.get("/api/auth/logout");
+      setIsLoggedIn({});
+      navigate("/");
       toast.success(data.message);
     }catch(err){
       toast.error(err.response?.data?.message || err.message);
@@ -49,7 +58,7 @@ const NoteState = (props) => {
     }
   }
   const values = {
-    newUser,logoutUser,newNotes,notes,getNotes,deleteNote
+    newUser,logoutUser,newNotes,notes,getNotes,deleteNote,isLoggedIn
   };
   return (
     <div>

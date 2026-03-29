@@ -1,6 +1,7 @@
 const Notes=require("../models/notesModel.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { wrapAsync } = require("../utils/wrapAsync.js");
+const User=require("../models/userModel.js");
 
 module.exports.newNote=wrapAsync(async(req,res)=>{
     const userId=req.user.id;
@@ -9,11 +10,15 @@ module.exports.newNote=wrapAsync(async(req,res)=>{
         ...req.body,
         relatedUser:userId,
     })
-    return res.json({success:true,message:"successfully fetch",newOne});
+    return res.json({success:true,message:"successfully Added",newOne});
 });
 module.exports.getNotes=async(req,res)=>{
-    const allNotes=await Notes.find();
-    return res.json({success:true,message:"fetching notes",allNotes});
+    const userId=req.user.id;
+    const user=await User.findById(userId);
+    const notesToSend = user.role === "admin"
+    ? await Notes.find()
+    : await Notes.find({ relatedUser: userId });
+    return res.json({success:true,message:"fetching notes",allNotes:notesToSend});
 }
 module.exports.delteNotes=async(req,res,next)=>{
     const {id}=req.params;

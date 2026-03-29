@@ -3,7 +3,7 @@ import NoteContext from "../context/NoteContext"
 import { useContext } from "react"
 const Navbar = () => {
     const context=useContext(NoteContext);
-    const {logoutUser}=context;
+    const {logoutUser,isLoggedIn}=context;
   return (
     <div className="bg-black w-full text-white flex justify-between absolute top-0 z-1">
       <div className="p-2">
