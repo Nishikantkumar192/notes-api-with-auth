@@ -139,3 +139,22 @@ npm install
 
 ## Run the project
 npm run both
+
+## 🌐 Live Demo
+
+- Frontend: https://notes-api-with-auth.vercel.app
+- Backend: https://notes-api-with-auth.onrender.com
+
+## 🔑 Demo Credentials
+
+You can register a new user or use:
+
+### Admin
+- Email: demo192@gmaild.com
+- Password: 123456
+
+### User
+- Email: demo9153@gmail.com
+- Password: 123456
+
+> Note: Admin role is assigned in the database.
