@@ -16,8 +16,8 @@ module.exports.registerUser=wrapAsync(async(req,res,next)=>{
     const token=jwt.sign({id:newUser._id},process.env.JWT_SECRET,{expiresIn:'7d'});
     res.cookie("token",token,{
         httpOnly:true,
-        secure:false,
-        sameSite:"lax",
+        secure:true,
+        sameSite:"None",
         maxAge:7*24*60*60*1000,
     })
     return res.json({success:true,message:"registered successfully",user:newUser})
@@ -31,8 +31,8 @@ module.exports.loginUser=wrapAsync(async(req,res,next)=>{
         const token= jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
         res.cookie("token",token,{
             httpOnly:true,
-            secure:false,
-            sameSite:"lax",
+            secure:true,
+            sameSite:"None",
             maxAge:7*24*60*60*1000,
         })
         return res.json({success:true,message:"You have Logged-in"})
