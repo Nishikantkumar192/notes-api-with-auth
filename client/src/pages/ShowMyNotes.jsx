@@ -25,16 +25,17 @@ const ShowMyNotes = () => {
       setDetails(initialState);
     }
   return (
-    <div className='scroll-container bg-yellow-400 h-screen flex flex-col items-center pt-[100px] overflow-y-auto'>
+    <div className='scroll-container bg-yellow-400 h-screen flex flex-col p-4 pt-[70px] overflow-y-auto'>
+      <h1 className='font-bold text-3xl'>Add in Notes</h1>
       <form onSubmit={handleSubmit}>
-        <div className='form-inputs bg-pink-400 p-4 rounded-lg'>
+        <div className='form-inputs bg-red-400 p-4 rounded-lg max-w-[500px]'>
             <label className='font-bold' htmlFor="title">Title</label>
             <div>
                 <input  type="text" name="title" placeholder='Enter the Title' id='title' value={details.title} onChange={handleChange} required/>
             </div>
             <label className='font-bold' htmlFor="description">Description</label>
             <div>
-                <textarea className="outline-none w-full" rows={3} name="description" id="description" type="text" placeholder='Enter the description' value={details.description} onChange={handleChange}></textarea>
+                <textarea className="outline-none w-full" rows={3} name="description" id="description" type="text" placeholder='Enter the description' value={details.description} onChange={handleChange} required></textarea>
             </div>
           <div className='text-center bg-green-800 rounded-lg mt-[10px]'>
             <button className='w-full cursor-pointer'>Upload</button>

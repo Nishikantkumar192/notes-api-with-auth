@@ -17,13 +17,14 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
 
+const dbUrl=process.env.ATLASDB_URL;
 main().then(()=>{
     console.log("connected Successfully");
 }).catch((error)=>{
     console.log(error);
 })
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/backendAssignment');
+    await mongoose.connect(dbUrl);
 }
 app.listen(port,()=>{
     console.log(`app is listening through ${port}`);

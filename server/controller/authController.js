@@ -20,7 +20,7 @@ module.exports.registerUser=wrapAsync(async(req,res,next)=>{
         sameSite:"lax",
         maxAge:7*24*60*60*1000,
     })
-    return res.json({success:true,message:"registered successfully"})
+    return res.json({success:true,message:"registered successfully",user:newUser})
 });
 module.exports.loginUser=wrapAsync(async(req,res,next)=>{
         const {email,password}=req.body;

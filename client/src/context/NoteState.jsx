@@ -7,12 +7,10 @@ import { useNavigate } from "react-router-dom";
 const NoteState = (props) => {
   const navigate=useNavigate();
   const [notes,setNotes]=useState([]);
-  const [isLoggedIn,setIsLoggedIn]=useState({});
   const newUser = async (url, input) => {
     try {
       const { data } = await api.post(url, input);
       if(url==="/api/auth/login" && data.success===true){
-        setIsLoggedIn({username:data.username});
         navigate("/fetchNotes");
       }
       toast.success(data.message);
@@ -23,7 +21,7 @@ const NoteState = (props) => {
   const logoutUser=async()=>{
     try{
       const {data}=await api.get("/api/auth/logout");
-      setIsLoggedIn({});
+      setNotes([]);
       navigate("/");
       toast.success(data.message);
     }catch(err){
@@ -57,8 +55,17 @@ const NoteState = (props) => {
       toast.error(err.response?.data?.message || err.message);
     }
   }
+  const updateNoteDetails=async(details,id)=>{
+    try{
+      const {data}=await api.post(`/api/notes/updateNoteDetails/${id}`,details);
+      toast.success(data.message);
+      navigate("/fetchNotes");
+    }catch(err){
+      toast.error(err.response?.data?.message || err.message);
+    }
+  }
   const values = {
-    newUser,logoutUser,newNotes,notes,getNotes,deleteNote,isLoggedIn
+    newUser,logoutUser,newNotes,notes,getNotes,deleteNote,updateNoteDetails
   };
   return (
     <div>

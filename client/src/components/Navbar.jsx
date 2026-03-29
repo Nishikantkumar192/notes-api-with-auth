@@ -3,12 +3,13 @@ import NoteContext from "../context/NoteContext"
 import { useContext } from "react"
 const Navbar = () => {
     const context=useContext(NoteContext);
-    const {logoutUser,isLoggedIn}=context;
+    const {logoutUser,isAdmin}=context;
   return (
     <div className="bg-black w-full text-white flex justify-between absolute top-0 z-1">
       <div className="p-2">
         <Link to="/">Home</Link>&nbsp; &nbsp;
-        <Link to="/fetchNotes">MyNotes</Link>
+        {isAdmin===true?<Link to="/fetchNotes">ShowNotes</Link>
+        :<Link to="/fetchNotes">MyNotes</Link>}
       </div>
       <div className="p-2">
         <Link to="/login">Login</Link>&nbsp; &nbsp;
