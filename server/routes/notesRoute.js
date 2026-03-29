@@ -18,5 +18,5 @@ router.post("/newNotes",schemaValidation,isUserExist,newNote);
 router.get("/getNotes",isUserExist,getNotes);
 router.get("/deleteNote/:id",isUserExist,delteNotes);
 router.get("/getParticularNotes/:id",isUserExist,getParticularNotes);
-router.post("/updateNoteDetails/:id",schemaValidation,isUserExist,updateNoteDetails);
+router.post("/updateNoteDetails/:id",isUserExist,updateNoteDetails);
 module.exports=router;
