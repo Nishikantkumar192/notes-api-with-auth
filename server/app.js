@@ -11,7 +11,7 @@ const cookieParser=require("cookie-parser");
 const ExpressError=require("./utils/ExpressError.js");
 const cors=require("cors");
 
-app.use(cors({origin:"https://your-frontend-url.vercel.app",credentials:true}))
+app.use(cors({origin:"https://notes-api-with-auth.vercel.app",credentials:true}))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
