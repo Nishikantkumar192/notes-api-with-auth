@@ -7,7 +7,7 @@ const { wrapAsync } = require("../utils/wrapAsync.js");
 module.exports.registerUser=wrapAsync(async(req,res,next)=>{
     const {password,email}=req.body;
     const isDuplicate=await User.findOne({email});
-    if(isDuplicate) return next(new ExpressError(401,"Use another email"));
+    if(isDuplicate) return next(new ExpressError(403,"Use another email"));
     const hashPassword=await bcrypt.hash(password,10);
     const newUser=await User.create({
         ...req.body,

@@ -1,6 +1,6 @@
 const express=require("express");
 const { newNote, getNotes, delteNotes, getParticularNotes, updateNoteDetails } = require("../controller/notesController");
-const { isUserExist } = require("../middleware");
+const { isUserExist, isPermission } = require("../middleware");
 const { notesSchema } = require("../joiSchema");
 const ExpressError = require("../utils/ExpressError");
 const router=express.Router();
@@ -16,7 +16,7 @@ const schemaValidation=(req,res,next)=>{
 
 router.post("/newNotes",schemaValidation,isUserExist,newNote);
 router.get("/getNotes",isUserExist,getNotes);
-router.get("/deleteNote/:id",isUserExist,delteNotes);
-router.get("/getParticularNotes/:id",isUserExist,getParticularNotes);
-router.post("/updateNoteDetails/:id",isUserExist,updateNoteDetails);
+router.get("/deleteNote/:id",isUserExist,isPermission,delteNotes);
+router.get("/getParticularNotes/:id",isUserExist,isPermission,getParticularNotes);
+router.post("/updateNoteDetails/:id",isUserExist,isPermission,updateNoteDetails);
 module.exports=router;
