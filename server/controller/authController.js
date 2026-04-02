@@ -35,7 +35,7 @@ module.exports.loginUser=wrapAsync(async(req,res,next)=>{
             sameSite:"None",
             maxAge:7*24*60*60*1000,
         })
-        return res.json({success:true,message:"You have Logged-in"})
+        return res.json({success:true,message:"You have Logged-in",user})
 });
 module.exports.logoutUser=(req,res)=>{
     res.clearCookie("token",{
@@ -45,4 +45,9 @@ module.exports.logoutUser=(req,res)=>{
     })
     return res.json({success:true,message:"logout successfull"});
 }
+module.exports.isLoggedIn=wrapAsync(async(req,res)=>{
+    const userId=req.user.id;
+    const user=await User.findById(userId);
+    return res.json({success:true,user});
+})
 
